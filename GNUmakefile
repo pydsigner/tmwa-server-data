@@ -18,6 +18,7 @@ world/map/conf/magic-secrets.sex: world/map/conf/magic-secrets.sex.template worl
 world/map/conf/secrets-build:
 
 format:
+	sed -ri "s%function\|script\|([^|]+)\|,%function|script|\1%i" world/map/npc/*/*.txt
 	sed -ri "s%([^|]+)\|script\|([^|]+)\|-1%\1|script|\2|32767%i" world/map/npc/*/*.txt
 	sed -i "s/\.gat//" world/map/npc/*/*.txt
 	sed -i "s/\r\n/\n/" world/map/npc/*/*.txt
