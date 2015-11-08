@@ -17,6 +17,14 @@ world/map/conf/magic-secrets.sex: world/map/conf/magic-secrets.sex.template worl
 	cd world/map/conf && ./build-magic.sh
 world/map/conf/secrets-build:
 
+format:
+	sed -ri "s%([^|]+)\|script\|([^|]+)\|-1%\1|script|\2|32767%i" world/map/npc/*/*.txt
+	sed -i "s/\.gat//" world/map/npc/*/*.txt
+	sed -i "s/\r\n/\n/" world/map/npc/*/*.txt
+	sed -i "s/\t/    /" world/map/npc/*/*.txt
+	sed -i -e "\$a\\" world/map/npc/*/*.txt
+	sed -ri "s%([^|]+)\|script\|([^|]+)\|([0-9]+)(,[0-9]+)?(,[0-9]+)?[^{]*\{%\1|script|\2|\3\4\5\n{%i" world/map/npc/*/*.txt
+
 mobxp: mobxp-impl indent-mobs
 mobxp-impl:
 	mv world/map/db/mob_db.txt world/map/db/mob_db.old
