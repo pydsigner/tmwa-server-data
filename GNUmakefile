@@ -19,12 +19,11 @@ world/map/conf/secrets-build:
 
 format:
 	find world/map/npc -name "*.txt" -type f -exec sed -ri \
-	-e "s%([^|]+)\|script\|([^|]+)\|-1%\1|script|\2|32767%ig" \
+	-e "s%^([^|/]+)\|script\|([^|]+)\|-1(\s*)$%\1|script|\2|32767%" \
 	-e "s/\.gat//g" -e "s/\r\n/\n/g" -e "s/\t/    /g" \
-	-e "s%([^|]+)\|script\|([^|]+)\|([0-9]+)(,[0-9]+)?(,[0-9]+)?[^{]*\{%\1|script|\2|\3\4\5\n{%ig" \
-	-e "s%function\|script\|([^| {]+)[^{]*\{%function|script|\1\n{%ig" \
-	-e "s%function\|script\|([^| {]+)([|,]+)%function|script|\1%ig" \
-	-e "s%-|script|([^| {]+)|32767,%-|script|\1|32767%ig" \
+	-e "s%^([^|/]+)\|script\|([^|/]+)\|([0-9]+)(,[0-9]+)?(,[0-9]+)?[^{/]*\{(\s*)$%\1|script|\2|\3\4\5\n{%" \
+	-e "s%^function\|script\|([^| {/]+)[^{]*\{(\s*)$%function|script|\1\n{%" \
+	-e "s%^function\|script\|([^| {/]+)([|,]+)(\s*)$%function|script|\1%" \
 	{} \; -exec vi -escwq {} \; -print
 
 mobxp: mobxp-impl indent-mobs
