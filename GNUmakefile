@@ -23,7 +23,8 @@ format:
 	-e "s/\.gat//g" -e "s/\r\n/\n/g" -e "s/\t/    /g" \
 	-e "s%([^|]+)\|script\|([^|]+)\|([0-9]+)(,[0-9]+)?(,[0-9]+)?[^{]*\{%\1|script|\2|\3\4\5\n{%ig" \
 	-e "s%function\|script\|([^| {]+)[^{]*\{%function|script|\1\n{%ig" \
-	-e "s%function\|script\|([^| {]+),%function|script|\1%ig" \
+	-e "s%function\|script\|([^| {]+)([|,]+)%function|script|\1%ig" \
+	-e "s%-|script|([^| {]+)|32767,%-|script|\1|32767%ig" \
 	{} \; -exec vi -escwq {} \; -print
 
 mobxp: mobxp-impl indent-mobs
