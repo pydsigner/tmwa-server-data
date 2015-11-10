@@ -18,7 +18,7 @@ world/map/conf/magic-secrets.sex: world/map/conf/magic-secrets.sex.template worl
 world/map/conf/secrets-build:
 
 format:
-	find world/map/npc -type f -exec sed -ri \
+	find world/map/npc -name "*.txt" -type f -exec sed -ri \
 	-e "s%([^|]+)\|script\|([^|]+)\|-1%\1|script|\2|32767%ig" \
 	-e "s/\.gat//g" -e "s/\r\n/\n/g" -e "s/\t/    /g" \
 	-e "s%([^|]+)\|script\|([^|]+)\|([0-9]+)(,[0-9]+)?(,[0-9]+)?[^{]*\{%\1|script|\2|\3\4\5\n{%ig" \
